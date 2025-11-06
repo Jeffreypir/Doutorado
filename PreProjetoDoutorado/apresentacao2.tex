@@ -1,0 +1,298 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[ruled,vlined]{algorithm2e} % Removido o pacote 'algorithm' conflitante
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, backgrounds, positioning}
+\usepackage{qrcode}
+
+% Configurações de tema e cores
+\usetheme{CambridgeUS}
+\usecolortheme{seahorse}
+
+\definecolor{techblue}{RGB}{0, 102, 204}
+\definecolor{techgreen}{RGB}{34, 153, 84}
+\definecolor{techgray}{RGB}{240, 240, 240}
+
+\title{Robótica Probabilística}
+\subtitle{Automação Estocástica com Arduino}
+\author{Jefferson Bezerra dos Santos}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section*{Sumário}
+\begin{frame}{Sumário}
+    \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}{Introdução}
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{introducaoImage.jpg}
+        \begin{flushright}
+            \tiny \textbf{Fonte}: Ilustração gerada por OpenAI, 2024.
+        \end{flushright}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \begin{quote}
+            \normalsize
+            \textit{``Robótica probabilística permite que robôs tomem decisões em ambientes incertos,
+            baseando-se em modelos estatísticos e algorítmicos para navegar e interagir de forma autônoma.''}
+        \end{quote}
+        \vspace{0.5cm}
+        \hfill \small \textbf{--- Sebastian Thrun}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}{Introdução}
+    \small
+    \begin{enumerate}
+        \item \textbf{Robótica Probabilística: Tomada de Decisão em Ambientes Incertos}
+        \begin{itemize}
+            \item Robôs utilizam algoritmos estatísticos para modelar incertezas e tomar decisões autônomas precisas em ambientes complexos.
+        \end{itemize}
+        
+        \item \textbf{Modelagem Estatística e Algoritmos: Base para a Autonomia Robótica}
+        \begin{itemize}
+            \item Filtros de Bayes permitem que robôs construam mapas e realizem inferências em tempo real para otimizar a navegação.
+        \end{itemize}
+        
+        \item \textbf{Arduino: Plataforma Flexível e Acessível na Robótica}
+        \begin{itemize}
+            \item O Arduino, sendo acessível e de código aberto, facilita o controle de sensores e atuadores em robôs, integrando-se facilmente a algoritmos probabilísticos.
+        \end{itemize}
+        
+        \item \textbf{Integração de Algoritmos Probabilísticos no Arduino}
+        \begin{itemize}
+            \item O Arduino pode processar dados em tempo real, executando algoritmos probabilísticos que permitem a ação autônoma em ambientes dinâmicos.
+        \end{itemize}
+        
+        \item \textbf{Aplicações Práticas e Impacto na Educação}
+        \begin{itemize}
+            \item Projetos com Arduino e robótica probabilística promovem inovação na educação e prototipagem de robôs autônomos.
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\section{Metodologia}
+
+\begin{frame}{Metodologia: Cálculo do Estado}
+    \begin{block}{Etapa 1: Previsão}
+        Cálculo do estado $x_t$ baseado em $x_{t-1}$ e no controle $u_t$:
+        \begin{equation}
+            \overline{bel}(x_t) = \int p(x_t \mid u_t, x_{t-1}) \, bel(x_{t-1}) \, dx_{t-1}
+        \end{equation}
+    \end{block}
+    \begin{itemize} 
+        \item $x_t$: estado no tempo $t$
+        \item $u_t$: controle no tempo $t$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Atualização de Medição}
+    \begin{block}{Etapa 2: Atualização}
+        Multiplicação pela probabilidade da medição $z_t$ observada:
+        \begin{equation}
+            bel(x_t) = \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)
+        \end{equation}
+    \end{block}
+    \begin{itemize} 
+        \item $z_t$: medição no tempo $t$
+        \item Normalização dada por: $\eta = p(z_t)^{-1}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Pseudocódigo do Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo FilterBayes}
+\KwIn{$bel(x_{t-1}), u_t, z_t$}
+\KwOut{$bel(x_t)$}
+\For{todo $x_t$}{
+    \textcolor{blue}{Previsão:} $\overline{bel}(x_t) \gets \int p(x_t \mid u_t, x_{t-1}) \, bel(x_{t-1}) \, dx_{t-1}$\;
+    \textcolor{blue}{Atualização:} $bel(x_t) \gets \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)$\;
+}
+\Return{$bel(x_t)$}
+\end{algorithm}
+\end{frame}
+
+% Estilos TikZ
+\tikzset{
+    startstop/.style={rectangle, rounded corners, minimum width=1.8cm, minimum height=0.6cm, text centered, draw=black, fill=red!30, font=\tiny},
+    process/.style={rectangle, minimum width=1.8cm, minimum height=0.6cm, text centered, draw=black, fill=blue!30, font=\tiny},
+    decision/.style={diamond, minimum width=2cm, minimum height=0.6cm, text centered, draw=black, fill=green!30, font=\tiny},
+    arrow/.style={->,>=stealth, thin}
+}
+
+\begin{frame}{Fluxograma: Aplicação do Filtro de Bayes}
+\centering
+\begin{tikzpicture}[node distance=1.2cm and 1.5cm]
+\node (start) [startstop] {Início};
+\node (dataCollect) [process, below=of start] {Coleta de dados\\(sensores Arduino)};
+\node (localization) [process, below=of dataCollect] {Estimativa de localização\\(filtro de Bayes)};
+\node (mapUpdate) [process, right=of localization, xshift=2.5cm] {Atualização do mapa};
+\node (decision) [decision, below=of localization, yshift=-0.3cm] {Plano necessário?};
+\node (motion) [process, below=of decision, yshift=-0.5cm] {Controle \\(atuadores)};
+\node (stop) [startstop, below=of motion] {Fim};
+
+\draw [arrow] (start) -- (dataCollect);
+\draw [arrow] (dataCollect) -- (localization);
+\draw [arrow] (localization.east) -- (2.6,-2.4);
+\draw [arrow] (localization) -- (decision);
+\draw [arrow] (mapUpdate.south) |- (decision.east);
+\draw [arrow] (decision.south) -- (motion.north);
+\draw [arrow] (motion) -- (stop);
+\end{tikzpicture}
+\end{frame}
+
+
+
+\begin{frame}{Estrutura de um Robô}
+  \begin{block}{Componentes Principais}
+    \begin{itemize}
+      \item Microcontroladores
+      \item Sensores
+      \item Atuadores
+    \end{itemize}
+  \end{block}
+  
+  \begin{center}
+    \includegraphics[width=0.35\textwidth]{Image/arduino.jpg} % Imagem de um robô
+    \vspace{0.2cm}
+    
+    % Fonte da imagem
+    {\tiny \textbf{Fonte:} Ilustração gerada por OpenAI, 2024.}
+  \end{center}
+\end{frame}
+
+% Diagrama de prototipagem com bordas arredondadas
+\begin{frame}{Diagrama de Prototipagem}
+    \begin{tikzpicture}[node distance=2.0cm, every node/.style={fill=white, font=\scriptsize, text=techblue}, align=center]
+        \node (arduino) [rectangle, draw, rounded corners, fill=techgreen!20, minimum width=3cm, minimum height=1cm] {Arduino};
+        \node (sensor) [circle, draw, fill=techblue!20, left of=arduino, xshift=-2cm, yshift=1cm] {Sensor\\Ultrassônico};
+        \node (motor) [circle, draw, fill=techblue!20, right of=arduino, xshift=2cm, yshift=1cm] {Motor};
+        \node (env) [rectangle, draw, rounded corners, fill=techgray!20, below of=arduino, yshift=-1.5cm] {Ambiente};
+        \draw[->, thick, techblue] (sensor) -- (arduino) node[midway, above] {Dados\\de Distância};
+        \draw[->, thick, techgreen] (arduino) -- (motor) node[midway, above] {Sinal\\de Controle};
+        \draw[<->, thick, techblue] (env) -- (sensor) node[midway, left] {Reflexão\\do Som};
+        \draw[->, thick, techgreen] (motor) -- (env) node[midway, right] {Movimento};
+    \end{tikzpicture}
+\end{frame}
+
+\section{Resultados Esperados}
+\begin{frame}{Resultados Esperados}
+    \begin{block}{Protótipos}
+        \begin{itemize}
+            \item Desenvolvimento de protótipos funcionais utilizando Arduino.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Modelagem}
+        \begin{itemize}
+            \item Análise da adaptação do robô a diferentes cenários com técnicas de programação estocástica.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Interação Robô-Ambiente}
+        \begin{itemize}
+            \item Investigação detalhada da interação entre o robô e o ambiente.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Autonomia e Robustez do Sistema}
+        \begin{itemize} 
+            \item Funcionamento autônomo em cenários dinâmicos com capacidade de adaptação a mudanças no ambiente.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Publicações e Impacto}
+    \begin{itemize}
+        \item Elaboração da tese de doutorado com resultados da pesquisa.
+        \item Publicações em revistas especializadas e apresentações em congressos.
+        \item Contribuição significativa para o estudo em estatística computacional.
+        \item Publicação de dois ou mais artigos em revistas especializadas em Estatística aplicada ou Robótica.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Para publicação}
+     \includegraphics[width=0.3\textwidth]{Image/journaEst.jpg} % Imagem de um robô
+     \includegraphics[width=0.3\textwidth]{Image/journalRob.jpg} % Imagem de um robô
+    \vspace{0.2cm}
+\end{frame}
+
+\begin{frame}{Wiki do projeto}
+    \begin{center}
+        \qrcode[height=5cm]{https://github.com/Jeffreypir/ProbabiliticRobotics/wiki/Rob\%C3\%B3tica-Probabilistica}
+
+          {\scriptsize \textbf{Fonte:} Elaborado pelo autor.}
+    \end{center}
+\end{frame}
+
+\section{Referências}
+\begin{frame}{Referências}
+    \footnotesize
+    \begin{thebibliography}{99}
+        \bibitem{thrun2005probabilistic}
+        THRUN, Sebastian; BURGARD, Wolfram; DURRANT-WHYTE, Hugh. \textit{Probabilistic Robotics}. MIT Press, 2005.
+        
+        \bibitem{cifuentes2019survey}
+        CIFUENTES, Mario; SERRANO, Sergio. A survey of probabilistic algorithms for robotics. \textit{Journal of Robotics}, 2019.
+
+        \bibitem{siegmund2019introduction}
+        SIEGMUND, Karl; HOFFMANN, Tilo. \textit{Introduction to Robotics: Analysis, Control, Applications}. CRC Press, 2019.
+    
+        \bibitem{smythe2021}
+        SMYTHE, Richard J. \textit{Arduino Measurements in Science: Advanced Techniques and Data Projects}. New York: Apress, 2021.
+
+        \bibitem{ross2014}
+        ROSS, Sheldon M. \textit{Introduction to Probability Models}. Academic Press, 2014.
+
+        \bibitem{barber2012bayesian}
+        BARBER, David. \textit{Bayesian Reasoning and Machine Learning}. Cambridge University Press, 2012.
+
+        \bibitem{Santos2024}
+        SANTOS, Jefferson Bezerra dos. ProbabiliticRobotics. Disponível em: \url{https://github.com/Jeffreypir/ProbabiliticRobotics}. Acesso em: 13 set. 2024.
+    \end{thebibliography}
+\end{frame}
+
+\section{Agradecimentos}
+\begin{frame}{Agradeço a todos pela atenção!}
+    \begin{center}
+        \begin{minipage}{0.1\textwidth} % Imagem à esquerda
+            \includegraphics[width=\textwidth]{Image/logo.png}
+        \end{minipage}%
+        \hfill % Preenche o espaço entre os elementos
+       \begin{minipage}{0.6\textwidth} % Texto centralizado
+            \centering
+            \textbf{Universidade Federal Rural de Pernambuco \\ Programa de Pós-Graduação em Biometria e Estatística Aplicada}
+        \end{minipage}%
+        \hfill % Preenche o espaço entre os elementos
+        \begin{minipage}{0.1\textwidth} % Imagem à direita
+            \includegraphics[width=\textwidth]{Image/PPGBEA.png}
+        \end{minipage}
+    \end{center}
+
+    \vspace{2cm} % Preenche o espaço entre os elementos
+    \begin{minipage}{0.10\textwidth} % QR Code à esquerda da imagem de dúvida
+        \qrcode{https://github.com/Jeffreypir/ProbabiliticRobotics/wiki/Rob\%C3\%B3tica-Probabilistica} 
+        \centering
+        \scalebox{0.9}{\tiny \hspace{0.3cm} Wiki do projeto}
+    \end{minipage}%
+    \vspace{-2cm}
+    \begin{center}
+        Perguntas?
+
+        \begin{minipage}{0.35\textwidth} % Imagem de dúvida à direita do QR Code
+            \includegraphics[width=\textwidth]{Image/duvida.png}
+        \end{minipage}
+
+        % Fonte da imagem
+        {\tiny \textbf{Fonte:} Ilustração gerada por OpenAI, 2024.}
+    \end{center}
+\end{frame}
+\end{document}

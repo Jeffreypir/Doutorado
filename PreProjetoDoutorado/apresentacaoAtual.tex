@@ -1,0 +1,114 @@
+
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usetheme{CambridgeUS}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, backgrounds}
+\usecolortheme{seahorse}
+
+% Definir paleta de cores
+\definecolor{techblue}{RGB}{0, 102, 204}
+\definecolor{techgreen}{RGB}{34, 153, 84}
+\definecolor{techgray}{RGB}{240, 240, 240}
+\definecolor{codebg}{RGB}{30, 30, 30}
+
+% Personalizar estilo dos títulos e subtítulos
+\setbeamercolor{frametitle}{bg=techblue, fg=white}
+\setbeamercolor{title}{fg=techgreen}
+\setbeamerfont{frametitle}{series=\bfseries, family=\sffamily}
+\setbeamerfont{title}{series=\bfseries, family=\sffamily}
+
+% Plano de fundo com tema de circuito (opcional)
+\setbeamertemplate{background}{
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=south west, opacity=0.05] at (current page.south west)
+      {\includegraphics[width=\paperwidth,height=\paperheight]{papel.jpg}};
+  \end{tikzpicture}
+}
+
+% Imagens de cabeçalho
+\titlegraphic{\includegraphics[height=1.4cm]{Image/UFRPE.jpg} \hfill
+\raisebox{.3\height}{\includegraphics[height=0.8cm]{Image/ppgg.png}}}
+
+\title{Robótica Probabilística}
+\subtitle{Automação Estocástica com Arduino}
+\author{Jefferson Bezerra dos Santos}
+\date{}
+
+\begin{document}
+
+% Slide de título
+\frame{\titlepage}
+
+\section*{Sumário}
+\begin{frame}{Sumário}
+    \tableofcontents
+\end{frame}
+
+\section{Introdução}
+\begin{frame}{Introdução}
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{introducaoImage.jpg}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \begin{quote}
+            \normalsize
+            \textit{“Robótica probabilística permite que robôs tomem decisões em ambientes incertos...”}
+        \end{quote}
+        \vspace{0.5cm}
+        \hfill \small \textbf{— Sebastian Thrun}
+    \end{minipage}
+\end{frame}
+
+% Exemplo de bloco com estilo de código
+\begin{frame}[fragile]{Exemplo de Código}
+    \begin{block}{Código Arduino}
+        \begin{verbatim}
+        int sensor = 7;
+        void setup() {
+          pinMode(sensor, INPUT);
+        }
+        void loop() {
+          int leitura = digitalRead(sensor);
+          Serial.println(leitura);
+        }
+        \end{verbatim}
+    \end{block}
+\end{frame}
+
+% Diagrama de prototipagem com bordas arredondadas
+\begin{frame}{Diagrama de Prototipagem}
+    \begin{tikzpicture}[node distance=2.0cm, every node/.style={fill=white, font=\scriptsize, text=techblue}, align=center]
+        \node (arduino) [rectangle, draw, rounded corners, fill=techgreen!20, minimum width=3cm, minimum height=1cm] {Arduino};
+        \node (sensor) [circle, draw, fill=techblue!20, left of=arduino, xshift=-2cm, yshift=1cm] {Sensor\\Ultrassônico};
+        \node (motor) [circle, draw, fill=techblue!20, right of=arduino, xshift=2cm, yshift=1cm] {Motor};
+        \node (env) [rectangle, draw, rounded corners, fill=techgray!20, below of=arduino, yshift=-1.5cm] {Ambiente};
+        \draw[->, thick, techblue] (sensor) -- (arduino) node[midway, above] {Dados\\de Distância};
+        \draw[->, thick, techgreen] (arduino) -- (motor) node[midway, above] {Sinal\\de Controle};
+        \draw[<->, thick, techblue] (env) -- (sensor) node[midway, left] {Reflexão\\do Som};
+        \draw[->, thick, techgreen] (motor) -- (env) node[midway, right] {Movimento};
+    \end{tikzpicture}
+\end{frame}
+
+% Slide de Conclusão
+\begin{frame}{Conclusão e Perguntas}
+    \begin{block}{Resumo dos Pontos Principais}
+        \begin{itemize}
+            \item Introdução à robótica probabilística e à plataforma Arduino.
+            \item Implementação prática de algoritmos probabilísticos em protótipos.
+            \item Resultados esperados e impactos futuros.
+        \end{itemize}
+    \end{block}
+    \vspace{1cm}
+    \centering
+    \textbf{\huge Perguntas?}
+\end{frame}
+
+\end{document}
+

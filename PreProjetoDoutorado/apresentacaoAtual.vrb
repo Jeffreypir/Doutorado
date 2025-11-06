@@ -1,0 +1,13 @@
+\frametitle{Exemplo de Código}
+\begin{block}{Código Arduino}
+        \begin{verbatim}
+        int sensor = 7;
+        void setup() {
+          pinMode(sensor, INPUT);
+        }
+        void loop() {
+          int leitura = digitalRead(sensor);
+          Serial.println(leitura);
+        }
+        \end{verbatim}
+    \end{block}

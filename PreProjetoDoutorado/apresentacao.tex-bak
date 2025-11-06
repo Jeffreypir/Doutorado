@@ -1,0 +1,265 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+% Tema da apresentação
+\usetheme{CambridgeUS}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, backgrounds}
+\usetikzlibrary{shapes, positioning, circuits.ee.IEC}
+
+% Pacote de cores
+\usecolortheme{seahorse}
+
+%------------------------------------------------------------
+\titlegraphic{\includegraphics[height=1.4cm]{Image/UFRPE.jpg}
+\hfill
+\raisebox{.3\height}{\includegraphics[height=0.8cm]{Image/ppgg.png}}
+ }
+
+ 
+% Definir paleta de cores
+\definecolor{techblue}{RGB}{0, 102, 204}
+\definecolor{techgreen}{RGB}{34, 153, 84}
+\definecolor{techgray}{RGB}{240, 240, 240}
+\definecolor{codebg}{RGB}{30, 30, 30}
+
+% Personalizar estilo dos títulos e subtítulos
+\setbeamercolor{frametitle}{bg=techblue, fg=white}
+\setbeamercolor{title}{fg=techgreen}
+\setbeamerfont{frametitle}{series=\bfseries, family=\sffamily}
+\setbeamerfont{title}{series=\bfseries, family=\sffamily}
+
+% Plano de fundo com tema de circuito (opcional)
+
+% Definindo o tema com fundo de circuitos
+\setbeamercolor{background canvas}{bg=white}
+\definecolor{circuitcolor}{RGB}{240, 240, 240}
+
+\setbeamertemplate{background}
+{
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[circuitcolor] (current page.south west) rectangle (current page.north east);
+    % Desenho do padrão de circuito
+    \draw[thin, gray] (0,0) grid (20,12);
+    % Aqui você pode adicionar mais detalhes ao padrão de circuitos
+    \foreach \x in {0,2,...,20}
+      \foreach \y in {0,2,...,12}
+        \draw[gray] (\x,\y) circle (0.1);
+  \end{tikzpicture}
+}
+
+
+\title{Robótica Probabilística}
+\subtitle{Automação Estocástica com Arduino}
+\author{Jefferson Bezerra dos Santos}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section*{Sumário}
+\begin{frame}{Sumário}
+    \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}{Introdução}
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[width=\linewidth]{introducaoImage.jpg}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        \begin{quote}
+            \normalsize
+            \textit{“Robótica probabilística permite que robôs tomem decisões em ambientes incertos,
+            baseando-se em modelos estatísticos e algorítmicos para navegar e interagir de forma autônoma.”}
+        \end{quote}
+        \vspace{0.5cm}
+        \hfill \small \textbf{— Sebastian Thrun}
+    \end{minipage}
+\end{frame}
+
+\begin{frame}
+    \small
+    \begin{enumerate}
+        \item \textbf{Robótica Probabilística: Tomada de Decisão em Ambientes Incertos}
+        \begin{itemize}
+            \item Robôs utilizam algoritmos estatísticos para modelar incertezas e tomar decisões autônomas precisas em ambientes complexos.
+        \end{itemize}
+        
+        \item \textbf{Modelagem Estatística e Algoritmos: Base para a Autonomia Robótica}
+        \begin{itemize}
+            \item Filtros de Bayes permitem que robôs construam mapas e realizem inferências em tempo real para otimizar a navegação.
+        \end{itemize}
+        
+        \item \textbf{Arduino: Plataforma Flexível e Acessível na Robótica}
+        \begin{itemize}
+            \item O Arduino, sendo acessível e de código aberto, facilita o controle de sensores e atuadores em robôs, integrando-se facilmente a algoritmos probabilísticos.
+        \end{itemize}
+        
+        \item \textbf{Integração de Algoritmos Probabilísticos no Arduino}
+        \begin{itemize}
+            \item O Arduino pode processar dados em tempo real, executando algoritmos probabilísticos que permitem a ação autônoma em ambientes dinâmicos.
+        \end{itemize}
+        
+        \item \textbf{Aplicações Práticas e Impacto na Educação}
+        \begin{itemize}
+            \item Projetos com Arduino e robótica probabilística promovem inovação na educação e prototipagem de robôs
+                autônomos.
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\section{Objetivos}
+\begin{frame}{Objetivos}
+    \begin{block}{Objetivo Principal}
+        Utilizar e aperfeiçoar a robótica probabilística para aplicação em contextos técnicos e sociais variados.
+    \end{block}
+    \begin{itemize}
+        \item Foco na implementação de protótipos com Arduino.
+        \item Exploração do uso de programação estocástica na robótica.
+    \end{itemize}
+\end{frame}
+
+
+\section{Metodologia}
+\begin{frame}{Metodologia: \\ Cálculo do Estado}
+    \begin{block}{Etapa 1: Previsão}
+        Cálculo do estado $x_t$ baseado em $x_{t-1}$ e no controle $u_t$:
+        \begin{equation}
+            $\overline{bel}(x_t) = \int p(x_t \mid u_t, x_{(t-1)}) \, bel(x_{(t-1)}) \, dx_{(t-1)}$\
+        \end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Atualização de Medição}
+    \begin{block}{Etapa 2: Atualização}
+        Multiplicação pela probabilidade da medição $z_t$ observada:
+        \begin{equation}
+            $bel(x_t) =  \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)$\
+        \end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Pseudocódigo do Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo FilterBayes}
+    \KwIn{$bel(x_{(t-1)}, u_t, z_t$)}
+\KwOut{$bel(x_t)$}
+\For{todo $x_t$}{
+    \STATE Previsão:  $\overline{bel}(x_t) \gets \int p(x_t \mid u_t, x_{(t-1)}) \, bel(x_{(t-1)}) \, dx_{(t-1)}$\
+
+    \STATE Atualização: $bel(x_t) \gets \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)$\
+}
+\Return{$bel(x_t)$}
+\end{algorithm}
+\end{frame}
+
+\section{Prototipagem com Arduino}
+\begin{frame}{Prototipagem com Arduino}
+    \begin{block}{}
+        Desenvolver e implementar protótipos utilizando a plataforma Arduino para aplicar robótica probabilística em diferentes contextos técnicos e sociais.
+    \end{block}
+
+    \begin{block}{}
+        \begin{itemize}
+            \item Construção de protótipos robóticos para aplicação prática.
+            \item Implementação de algoritmos estocásticos para controle e navegação dos robôs.
+            \item Testes em cenários diversos para avaliar a adaptabilidade e eficiência dos robôs.
+        \end{itemize}
+    \end{block}
+
+\end{frame}
+\begin{frame}
+  \frametitle{Estrutura de um Robô}
+  \begin{block}{Componentes Principais}
+    \begin{itemize}
+      \item Microcontroladores
+      \item Sensores
+      \item Atuadores
+    \end{itemize}
+  \end{block}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{Image/arduino.jpg} % Imagem de um robô
+  \end{center}
+\end{frame}
+
+
+
+% Diagrama de prototipagem com bordas arredondadas
+\begin{frame}{Diagrama de Prototipagem}
+    \begin{tikzpicture}[node distance=2.0cm, every node/.style={fill=white, font=\scriptsize, text=techblue}, align=center]
+        \node (arduino) [rectangle, draw, rounded corners, fill=techgreen!20, minimum width=3cm, minimum height=1cm] {Arduino};
+        \node (sensor) [circle, draw, fill=techblue!20, left of=arduino, xshift=-2cm, yshift=1cm] {Sensor\\Ultrassônico};
+        \node (motor) [circle, draw, fill=techblue!20, right of=arduino, xshift=2cm, yshift=1cm] {Motor};
+        \node (env) [rectangle, draw, rounded corners, fill=techgray!20, below of=arduino, yshift=-1.5cm] {Ambiente};
+        \draw[->, thick, techblue] (sensor) -- (arduino) node[midway, above] {Dados\\de Distância};
+        \draw[->, thick, techgreen] (arduino) -- (motor) node[midway, above] {Sinal\\de Controle};
+        \draw[<->, thick, techblue] (env) -- (sensor) node[midway, left] {Reflexão\\do Som};
+        \draw[->, thick, techgreen] (motor) -- (env) node[midway, right] {Movimento};
+    \end{tikzpicture}
+\end{frame}
+\begin{frame}{Resultados Esperados}
+    \begin{block}{Protótipos}
+        \begin{itemize}
+            \item Desenvolvimento de protótipos funcionais utilizando Arduino.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Modelagem}
+        \begin{itemize}
+            \item Análise da adaptação do robô a diferentes cenários com técnicas de programação estocástica.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Interação Robô-Ambiente}
+        \begin{itemize}
+            \item Investigação detalhada da interação entre o robô e o ambiente.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Publicações e Impacto}
+    \begin{itemize}
+        \item Elaboração da tese de doutorado com resultados da pesquisa.
+        \item Publicações em revistas especializadas e apresentações em congressos.
+        \item Contribuição significativa para o estudo em estatística computacional.
+        \item Publicação de dois ou mais artigos em revistas especializas em Estatística aplicada ou Robótica.
+    \end{itemize}
+\end{frame}
+
+\section{Referências}
+\begin{frame}{Referências}
+    \footnotesize
+    \begin{thebibliography}{99}
+        \bibitem{thrun2005probabilistic}
+        THRUN, Sebastian; BURGARD, Wolfram; DURRANT-WHYTE, Hugh. \textit{Probabilistic Robotics}. MIT Press, 2005.
+        
+        \bibitem{cifuentes2019survey}
+        CIFUENTES, Mario; SERRANO, Sergio. A survey of probabilistic algorithms for robotics. \textit{Journal of Robotics}, 2019.
+
+        \bibitem{siegmund2019introduction}
+        SIEGMUND, Karl; HOFFMANN, Tilo. \textit{Introduction to Robotics: Analysis, Control, Applications}. CRC Press, 2019.
+    
+        \bibitem{smythe2021}
+        SMYTHE, Richard J. \textit{Arduino Measurements in Science: Advanced Techniques and Data Projects}. New York: Apress, 2021.
+
+        \bibitem{ross2014}
+        ROSS, Sheldon M. \textit{Introduction to Probability Models}. Academic Press, 2014.
+
+        \bibitem{Santos2024}
+        SANTOS, Jefferson Bezerra dos. ProbabiliticRobotics. Disponível em: \url{https://github.com/Jeffreypir/ProbabiliticRobotics}. Acesso em: 13 set. 2024.
+
+
+    \end{thebibliography}
+\end{frame}
+% \bibitem{barber2012bayesian}BARBER, David. \textit{Bayesian Reasoning and Machine Learning}. Cambridge University Press, 2012.
+        
+
+\end{document}
+

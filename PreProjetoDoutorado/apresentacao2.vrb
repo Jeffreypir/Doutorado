@@ -1,0 +1,11 @@
+\frametitle{Pseudocódigo do Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo FilterBayes}
+\KwIn{$bel(x_{t-1}), u_t, z_t$}
+\KwOut{$bel(x_t)$}
+\For{todo $x_t$}{
+    \textcolor{blue}{Previsão:} $\overline{bel}(x_t) \gets \int p(x_t \mid u_t, x_{t-1}) \, bel(x_{t-1}) \, dx_{t-1}$\;
+    \textcolor{blue}{Atualização:} $bel(x_t) \gets \eta \cdot p(z_t \mid x_t) \cdot \overline{bel}(x_t)$\;
+}
+\Return{$bel(x_t)$}
+\end{algorithm}
