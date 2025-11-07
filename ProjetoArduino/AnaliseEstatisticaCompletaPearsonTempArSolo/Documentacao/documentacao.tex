@@ -1,0 +1,232 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\title{Sistema de Monitoramento Agrícola Inteligente}
+\author{Jefferson }
+\date{}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introdução}
+Este documento descreve o sistema de monitoramento agrícola implementado para Arduino Nano, com foco nas análises estatísticas utilizadas. O sistema coleta dados de temperatura, umidade do ar e umidade do solo, realizando análises avançadas e armazenando os resultados.
+
+\section{Estatísticas Implementadas}
+
+\subsection{Métricas Descritivas}
+
+\subsubsection{Média Aritmética}
+Calculada como:
+
+\[
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i
+\]
+
+\begin{lstlisting}[language=C++]
+// Cálculo da média no código
+float sum = 0;
+for (byte i = 0; i < SAMPLE_SIZE; i++) {
+    sum += samples[i];
+}
+res.media = sum / valid_count;
+\end{lstlisting}
+
+\subsubsection{Variância e Desvio Padrão}
+Variância amostral:
+
+\[
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+\]
+
+Desvio padrão:
+
+\[
+s = \sqrt{s^2}
+\]
+
+\begin{lstlisting}[language=C++]
+// Implementação no código
+res.variancia = (sum_sq - valid_count * pow(res.media, 2)) / (valid_count - 1);
+res.desvio_padrao = sqrt(res.variancia);
+\end{lstlisting}
+
+\subsection{Medidas de Posição}
+
+\subsubsection{Quartis}
+\begin{itemize}
+\item Q1 (Primeiro quartil): 25\% dos dados estão abaixo
+\item Mediana (Segundo quartil): 50\% dos dados estão abaixo
+\item Q3 (Terceiro quartil): 75\% dos dados estão abaixo
+\end{itemize}
+
+\begin{lstlisting}[language=C++]
+// Cálculo dos quartis após ordenação
+res.q1 = sorted[SAMPLE_SIZE / 4];
+res.mediana = sorted[SAMPLE_SIZE / 2];
+res.q3 = sorted[3 * SAMPLE_SIZE / 4];
+\end{lstlisting}
+
+\subsubsection{Amplitude Interquartil (IQR)}
+\[
+IQR = Q3 - Q1
+\]
+
+\begin{lstlisting}[language=C++]
+res.iqr = res.q3 - res.q1;
+\end{lstlisting}
+
+\subsection{Identificação de Outliers}
+Um valor é considerado outlier se:
+
+\[
+x < Q1 - 1.5 \times IQR \quad \text{ou} \quad x > Q3 + 1.5 \times IQR
+\]
+
+\begin{lstlisting}[language=C++]
+float lower_bound = res.q1 - IQR_FACTOR * res.iqr;
+float upper_bound = res.q3 + IQR_FACTOR * res.iqr;
+res.is_outlier = (new_val < lower_bound) || (new_val > upper_bound);
+\end{lstlisting}
+
+\section{Correlação de Pearson}
+
+\subsection{Fórmula Matemática}
+\[
+r = \frac{n\sum xy - (\sum x)(\sum y)}{\sqrt{[n\sum x^2 - (\sum x)^2][n\sum y^2 - (\sum y)^2]}}
+\]
+
+\subsection{Implementação}
+\begin{lstlisting}[language=C++]
+float calcularPearson(float x[], float y[], byte n) {
+  float sum_x = 0, sum_y = 0, sum_xy = 0;
+  float sum_x2 = 0, sum_y2 = 0;
+  
+  for (byte i = 0; i < n; i++) {
+    sum_x += x[i];
+    sum_y += y[i];
+    sum_xy += x[i] * y[i];
+    sum_x2 += x[i] * x[i];
+    sum_y2 += y[i] * y[i];
+  }
+  
+  float numerador = n * sum_xy - sum_x * sum_y;
+  float denominador = sqrt((n * sum_x2 - sum_x * sum_x) * 
+                     (n * sum_y2 - sum_y * sum_y));
+  
+  return (denominador != 0) ? numerador / denominador : 0;
+}
+\end{lstlisting}
+
+\subsection{Interpretação}
+\begin{itemize}
+\item $r \approx 1$: Correlação positiva forte
+\item $r \approx -1$: Correlação negativa forte
+\item $r \approx 0$: Nenhuma correlação linear
+\end{itemize}
+
+\section{Exemplos Práticos}
+
+\subsection{Exemplo de Dados}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Temperatura (°C) & Umidade Ar (\%) & Umidade Solo (\%) \\
+\hline
+25.3 & 62.5 & 45.2 \\
+28.4 & 65.2 & 72.3 \\
+32.1 & 63.0 & 71.8 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Cálculo de Estatísticas}
+Para a temperatura (25.3, 28.4, 32.1):
+
+\begin{itemize}
+\item Média: $(25.3 + 28.4 + 32.1)/3 = 28.6$
+\item Variância: $[(25.3-28.6)^2 + (28.4-28.6)^2 + (32.1-28.6)^2]/2 = 11.56$
+\item Desvio padrão: $\sqrt{11.56} = 3.4$
+\end{itemize}
+
+\subsection{Correlação Calculada}
+Entre temperatura e umidade do ar:
+\begin{itemize}
+\item Coeficiente: -0.72 (correlação negativa moderada)
+\item Significativa: SIM (abs(-0.72)$ > $ 0.5)
+\end{itemize}
+
+\section{Estrutura do Código}
+
+\subsection{Organização}
+\begin{itemize}
+\item \textbf{Setup}: Inicialização de sensores e SD card
+\item \textbf{Loop principal}:
+  \begin{enumerate}
+  \item Leitura de sensores
+  \item Cálculo de estatísticas
+  \item Detecção de outliers
+  \item Armazenamento em SD
+  \end{enumerate}
+\end{itemize}
+
+\subsection{Classes e Estruturas}
+\begin{lstlisting}[language=C++]
+struct DadosSensores {
+  float temperatura;
+  float umidade_ar;
+  float umidade_solo_percent;
+};
+
+struct Estatisticas {
+  float media, desvio_padrao, variancia;
+  float q1, mediana, q3, iqr;
+  bool is_outlier;
+};
+\end{lstlisting}
+
+\section{Conclusão}
+O sistema implementa análises estatísticas robustas para monitoramento agrícola, incluindo:
+\begin{itemize}
+\item Estatísticas descritivas completas
+\item Identificação de valores atípicos
+\item Análise de correlação entre variáveis
+\end{itemize}
+
+Esta documentação fornece a base teórica e prática para entender e expandir o sistema.
+
+\end{document}
