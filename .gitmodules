@@ -1,0 +1,3 @@
+[submodule "SensorArduino"]
+	path = SensorArduino
+	url = https://github.com/Jeffreypir/SensorArduino.git
