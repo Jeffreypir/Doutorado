@@ -82,7 +82,7 @@
     \begin{block}{Solução Proposta}
         Abordagens probabilísticas oferecem:
         \begin{itemize}
-            \item Framework matemático rigoroso para lidar com incertezas
+            \item Modelo matemático para lidar com incertezas
             \item Estimativas de confiança para decisões
             \item Robustez em ambientes complexos
             \item Implementação eficiente em hardware limitado
@@ -119,11 +119,11 @@
                     \item \textbf{Thrun et al. (2005)} \\
                         \textit{Probabilistic Robotics} 
 
-                    \item \textbf{Bayesian Meta-Learning for Autonomous Robots (2025)} \\
-                        Revisão sobre meta-aprendizado bayesiano em robôs autônomos.
-
                     \item \textbf{Bayesian Neural Networks: An Introduction and Survey (2020)} \\
                         Introdução abrangente às Redes Neurais Bayesianas.
+
+                    \item \textbf{Bayesian Meta-Learning for Autonomous Robots (2025)} \\
+                        Revisão sobre meta-aprendizado bayesiano em robôs autônomos.
 
                     \item \textbf{Enhancing Autonomous Systems with Bayesian Neural Networks (2025)} \\
                         Aplicação de redes neurais bayesianas em navegação autônoma.
@@ -263,6 +263,9 @@
         \bibitem{bishop2006pattern}
         BISHOP, Christopher M. \textit{Pattern Recognition and Machine Learning}. New York: Springer, 2006.
 
+        \bibitem{fox1999monte}
+        FOX, Dieter et al. Monte Carlo Localization: Efficient Position Estimation for Mobile Robots. In: \textit{AAAI}, 1999.
+
         \bibitem{enhancing_bnn2025}
         JONES, M.; KIM, H.; RAHMAN, S. Enhancing Autonomous Systems with Bayesian Neural Networks. \textit{Frontiers in Built Environment}, 2025.
 
@@ -283,9 +286,6 @@
 
         \bibitem{wang2025bayesian_metalearning}
         WANG, Y.; LI, S.; ZHOU, X. Bayesian Meta-Learning for Autonomous Robots. \textit{Journal of Intelligent \& Robotic Systems}, 2025.
-
-        \bibitem{fox1999monte}
-        FOX, Dieter et al. Monte Carlo Localization: Efficient Position Estimation for Mobile Robots. In: \textit{AAAI}, 1999.
     }
     \end{thebibliography}
 \end{frame}

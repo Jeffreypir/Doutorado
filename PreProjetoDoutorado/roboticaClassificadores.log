@@ -1,12 +1,12 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.30)  12 SEP 2025 12:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.30)  11 NOV 2025 10:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/home/jefferson/pendriver/MeuProjetoDoutorado/Apresentacao/roboticaClassifica
-dores.tex
+**/home/jefferson/pendriver/MeuProjetoDoutorado/UFPE/PreProjetoDoutorado/roboti
+caClassificadores.tex
 
-(/home/jefferson/pendriver/MeuProjetoDoutorado/Apresentacao/roboticaClassificad
-ores.tex
+(/home/jefferson/pendriver/MeuProjetoDoutorado/UFPE/PreProjetoDoutorado/robotic
+aClassificadores.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/share/texmf-dist/tex/latex/beamer/beamer.cls
@@ -1277,12 +1277,12 @@ Package rerunfilecheck Info: File `roboticaClassificadores.out' has not changed
  ) 
 Here is how much of TeX's memory you used:
  31704 strings out of 475151
- 653878 string characters out of 5766386
+ 653914 string characters out of 5766386
  1056481 words of memory out of 5000000
  54056 multiletter control sequences out of 15000+600000
  569693 words of font info for 74 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
- 128i,21n,123p,484b,1058s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,21n,123p,496b,1058s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/sh
 are/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-dist/fonts/type1/pu
@@ -1290,7 +1290,7 @@ blic/amsfonts/cm/cmss8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb
 ></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on roboticaClassificadores.pdf (6 pages, 1925936 bytes).
+Output written on roboticaClassificadores.pdf (6 pages, 1925989 bytes).
 PDF statistics:
  384 PDF objects out of 1000 (max. 8388607)
  284 compressed objects within 3 object streams

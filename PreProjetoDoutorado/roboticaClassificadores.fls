@@ -1,7 +1,7 @@
-PWD /home/jefferson/pendriver/MeuProjetoDoutorado/Apresentacao
+PWD /home/jefferson/pendriver/MeuProjetoDoutorado/UFPE/PreProjetoDoutorado
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/jefferson/pendriver/MeuProjetoDoutorado/Apresentacao/roboticaClassificadores.tex
+INPUT /home/jefferson/pendriver/MeuProjetoDoutorado/UFPE/PreProjetoDoutorado/roboticaClassificadores.tex
 OUTPUT roboticaClassificadores.log
 INPUT /usr/share/texmf-dist/tex/latex/beamer/beamer.cls
 INPUT /usr/share/texmf-dist/tex/latex/beamer/beamer.cls
