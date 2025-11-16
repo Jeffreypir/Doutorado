@@ -53,12 +53,21 @@ packer.startup(function(use)
     })
 
     -- ---------- Interface ----------
-    use("nvim-tree/nvim-web-devicons") -- Icons
     use("nvim-lualine/lualine.nvim") -- Theme
     use("lukas-reineke/indent-blankline.nvim")
-    use("yorik1984/lualine-theme.nvim") -- Theme for lualine
-    use('nvim-tree/nvim-tree.lua') -- Explorer
+    use("yorik1984/lualine-theme.nvim") -- Theme for lualine-theme 
 
+    -- Explore do nvim 
+
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- ícones
+            "MunifTanjim/nui.nvim",        -- interface moderna
+        }
+    }
 
     -- ------------ Temas --------------------
     use {"elvessousa/sobrio"}
