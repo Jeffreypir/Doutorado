@@ -1,0 +1,1 @@
+au BufRead,BufNewFile *.mp3 set filetype=music

@@ -1,0 +1,44 @@
+" Configuration for python 
+" Leader \
+" macro
+:nnoremap <F4> viw~<ESC>A<space>
+:inoreabbrev <leader>function  function <+name+> (<+parameters+>) <ESC>o<+args+> <ESC>oend
+
+"Atalhos
+:inoremap " ""<ESC>i
+:inoremap { {}<ESC>i
+:inoremap ( ()<ESC>i
+:inoremap [ []<ESC>i
+
+"structure loop
+"for
+":inoremap <leader>sf for i in range (<+arg+>):<ESC>o
+:inoreabbrev  <leader>for for i = <+begin+>, <+end+>, <+step+> do<CR><+arg+><CR>end
+
+"while
+:inoreabbrev <leader>while while <+arg+> do <ESC>o<+arg2+><ESC>oend
+
+"repeat
+:inoreabbrev <leader>repeat repeat<CR><+arg+><CR>until <+condicion+> 
+"if
+:inoreabbrev <leader>if if<+arg1+> then<cr><+arg2+> <ESC>oend
+
+"ifelse
+"
+:inoreabbrev <leader>ifelse if<+arg1+> then<cr><+arg2+><cr>else <ESC>oend
+
+"print 
+:inoreabbrev \print print(<+arguments+>)
+
+"Compementation
+:inoremap \c :<ESC>a<c-x><c-n>
+"name
+:inoremap -na <ESC>"%pa
+
+"date
+:inoremap -da <ESC>:pu = strftime('%c')<CR><ESC>i<BS><ESC>$a
+
+"Python 3
+:noremap  <F2> :!lua "%" <CR>
+
+:nnoremap <F3> :!chmod +x "%" <CR>

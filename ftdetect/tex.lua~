@@ -1,0 +1,30 @@
+
+--[[================ Configuration Latex ========================
+--         Author:Jefferson Bezerra dos Santos
+--]]--===========================================================
+
+-- Configuração para carregar templates em arquivos *.c
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    pattern = "*.tex",
+    callback = function()
+        vim.bo.filetype = "tex" -- Define o tipo de arquivo como 'tex'
+    end,
+})
+
+-- Carregar template para arquivos .c
+vim.api.nvim_create_autocmd("BufNewFile", {
+    pattern = "*.tex",
+    callback = function()
+        -- Caminho do template
+        local template_path = vim.fn.expand("$HOME/.config/nvim/after/template/template_aula.tex")
+        -- Verificar se o template existe
+        if vim.fn.filereadable(template_path) == 1 then
+            -- Inserir o conteúdo do template no novo arquivo
+            vim.cmd("0r " .. template_path)
+        else
+            print("Template não encontrado: " .. template_path)
+        end
+    end,
+})
+
+

@@ -1,0 +1,2 @@
+"Load template in *tex
+au BufNewFile,BufRead *tex :set filetype=tex

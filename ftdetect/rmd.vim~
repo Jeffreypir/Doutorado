@@ -1,0 +1,7 @@
+"Load template in *tex
+au BufNewFile,BufRead *.rmd :set filetype=rmd
+au BufNewFile,BufRead *.rmd normal gg=G 
+au BufNewFile *.rmd :r $HOME/.config/nvim/after/template/template.Rmd
+au BufNewFile *.rmd normal ggdd
+
+
