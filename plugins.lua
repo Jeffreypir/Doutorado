@@ -83,6 +83,14 @@ packer.startup(function(use)
     -- Sintaxe para Arduino
     use("sudar/vim-arduino-syntax")
 
+    -- telescope
+    use 'nvim-lua/plenary.nvim'   -- dependência obrigatória
+    use {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.2',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+
 
     -- ---------- Markdown ----------
     use("artempyanykh/marksman")
