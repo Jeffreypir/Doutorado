@@ -1,0 +1,486 @@
+\documentclass[12pt,a4paper]{article}
+
+% ------------------------------------------------
+% PACOTES
+% ------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+
+\geometry{margin=2.2cm}
+\onehalfspacing
+
+% Estilo dos títulos
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% ------------------------------------------------
+% DOCUMENTO
+% ------------------------------------------------
+\begin{document}
+
+\begin{center}
+    {\Huge \textbf{Guia Completo de Apresentação para Banca de Doutorado}} \\[0.3cm]
+    {\large Jefferson Bezerra dos Santos} \\[0.2cm]
+    {\large \textit{Robótica Probabilística}} \\[1cm]
+\end{center}
+
+\section{Introdução}
+Este documento reúne todas as orientações práticas, estratégicas, comportamentais e científicas necessárias para uma apresentação de doutorado de alto nível.  
+
+Seu objetivo é servir como \textbf{manual de estudo}, fornecendo:
+\begin{itemize}
+    \item Estrutura ideal da apresentação oral;
+    \item Como se comportar diante da banca;
+    \item Metodologia explicada de forma clara e sólida;
+    \item Roteiro detalhado de fala;
+    \item Estratégias de respostas para perguntas difíceis;
+    \item Pontos fortes do projeto de pesquisa;
+    \item Justificativas científicas e técnicas;
+    \item Diretrizes para seu Beamer.
+\end{itemize}
+
+\section{Estrutura Ideal da Apresentação}
+A apresentação deve ter duração entre 15 e 20 minutos.  
+A organização recomendada segue:
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+    \item Abertura (1 minuto)
+    \item Justificativa (2 minutos)
+    \item Revisão da Literatura (3 minutos)
+    \item Objetivos Geral e Específicos (2 minutos)
+    \item Metodologia (6 minutos)
+    \item Contribuições Esperadas (1 minuto)
+    \item Encerramento (30 segundos)
+\end{enumerate}
+
+Cada parte é explicada detalhadamente nas próximas seções.
+
+\section{1. Abertura da Apresentação}
+A banca avalia o início da apresentação como um indicador de segurança e domínio.
+
+\subsection{Frase Recomendada}
+\textit{
+“Bom dia a todos. Meu nome é Jefferson Bezerra dos Santos e apresento hoje minha proposta de pesquisa intitulada \textbf{Robótica Probabilística}, com foco em métodos bayesianos para estimativa de estado e classificação em plataformas embarcadas.”}
+
+\subsection{Objetivo da abertura}
+\begin{itemize}
+    \item Demonstrar clareza;
+    \item Mostrar objetividade;
+    \item Indicar domínio sem arrogância.
+\end{itemize}
+
+\section{2. Justificativa da Pesquisa}
+A justificativa é o momento para explicar \textbf{por que sua pesquisa é necessária}.
+
+\subsection{Problemas Reais da Robótica}
+\begin{itemize}
+    \item Incerteza sensorial (ruído, imprecisão);
+    \item Incerteza na atuação (derrapagem, erros nos motores);
+    \item Ambientes imprevisíveis e dinâmicos.
+\end{itemize}
+
+\subsection{Enfoque Científico}
+\textbf{Robôs nunca têm acesso ao estado verdadeiro do mundo.}  
+Essa frase, dita com convicção, impressiona a banca.
+
+\subsection{Justificativa Central}
+O uso de abordagens probabilísticas permite:
+\begin{itemize}
+    \item modelagem formal de incertezas;
+    \item decisões mais confiáveis;
+    \item fusão sensorial robusta;
+    \item execução em hardware limitado.
+\end{itemize}
+
+\section{3. Revisão da Literatura}
+Uma boa revisão não cita apenas autores; ela expõe \textbf{lacunas científicas}.
+
+\subsection{Principais Referências}
+\begin{itemize}
+    \item Thrun et al. (2005) – base teórica da robótica probabilística;
+    \item Särkkä (2013) – filtros bayesianos;
+    \item Redes Neurais Bayesianas (2020–2025);
+    \item Meta-aprendizado bayesiano.
+\end{itemize}
+
+\subsection{Lacuna da Literatura}
+\begin{quote}
+Falta um framework unificado que combine \textbf{filtros bayesianos} e \textbf{classificadores probabilísticos} \textbf{executando de forma eficiente} em plataformas embarcadas de baixo custo.
+\end{quote}
+
+Essa é sua contribuição potencial.
+
+\section{4. Objetivos}
+\subsection{Objetivo Geral}
+Desenvolver e implementar métodos de robótica probabilística com ênfase em filtros bayesianos e classificadores para robôs embarcados.
+
+\subsection{Objetivos Específicos}
+\begin{enumerate}
+    \item Modelar matematicamente as incertezas sensoriais e de atuação;
+    \item Implementar filtros para fusão de dados e estimativa de estado;
+    \item Desenvolver classificadores probabilísticos para tomada de decisão;
+    \item Otimizar esses métodos para execução em microcontroladores.
+\end{enumerate}
+
+% ----------------------------------------------------
+% METODOLOGIA EXPANDIDA E COMPLETA
+% ----------------------------------------------------
+\section{5. Metodologia}
+Esta é a parte mais analisada pela banca.  
+A seguir está uma versão expandida, organizada e convincente tanto para leitura quanto para apresentação oral.
+
+\subsection{5.1 Visão Geral da Metodologia}
+A metodologia é estruturada em quatro camadas principais:
+
+\begin{enumerate}
+    \item \textbf{Modelagem Probabilística do Sistema}  
+    Definição dos modelos de movimento e observação.
+
+    \item \textbf{Estimativa Recursiva de Estado}  
+    Aplicação de filtros bayesianos (Kalman, EKF, PF).
+
+    \item \textbf{Classificação Probabilística}  
+    Uso de Naive Bayes ou Redes Bayesianas para tomada de decisão.
+
+    \item \textbf{Otimização Computacional}  
+    Adaptação dos algoritmos para execução em microcontroladores.
+\end{enumerate}
+
+Durante a apresentação, você dirá:
+
+\textit{
+“O foco da metodologia é construir um pipeline probabilístico capaz de lidar com incertezas e ainda assim ser leve o suficiente para rodar em hardware embarcado.”}
+
+\subsection{5.2 Modelagem Matemática das Incertezas}
+
+A robótica probabilística assume que:
+
+\begin{itemize}
+    \item sensores são ruidosos;  
+    \item atuadores não são perfeitos;  
+    \item o estado real nunca é observado diretamente.
+\end{itemize}
+
+Assim, representamos o estado por uma \textbf{distribuição de probabilidade}, não por um valor único.
+
+\subsubsection{Modelo de Movimento}
+\[
+p(x_t | u_t, x_{t-1})
+\]
+
+Interpretação para a banca:
+
+\textit{
+“O modelo de movimento prediz onde o robô deveria estar, mas sempre com incerteza acumulada.”}
+
+\subsubsection{Modelo de Observação}
+\[
+p(z_t | x_t)
+\]
+
+Interpretação:
+
+\textit{
+“O modelo de observação diz quão provável é um sensor medir determinado valor, dado o estado real.”}
+
+\subsection{5.3 Filtro Bayesiano — Estrutura Completa}
+
+O filtro bayesiano é o mecanismo central da minha metodologia. Ele permite que o robô estime seu estado mesmo quando sensores e atuadores são imprecisos.
+
+Ele funciona em dois passos.
+No passo de predição, uso o modelo de movimento para projetar a crença anterior para o instante atual, incorporando o comando de controle e seu respectivo erro. Isso gera a crença prévia, onde o robô acha que está antes de olhar para os sensores.
+
+No passo de correção, comparo essa predição com a medição do sensor através do modelo de observação, que calcula quão consistente é aquela medição para cada estado possível. Multiplico essa coerência pela crença prévia e normalizo a distribuição.
+
+
+O resultado final é a crença posterior, uma estimativa probabilística completa sobre onde o robô está. Essa abordagem é fundamental porque robôs nunca observam diretamente o estado real; eles sempre operam sob incerteza, e o filtro bayesiano é a forma matematicamente correta de lidar com isso.”
+
+\subsubsection{Predição}
+\[
+\overline{bel}(x_t) = \int p(x_t | u_t, x_{t-1}) \, bel(x_{t-1}) \, dx_{t-1}
+\]
+
+\textit{
+“A predição projeta a crença anterior para frente, incorporando a incerteza do movimento.”}
+
+\subsubsection{Correção}
+\[
+bel(x_t) = \eta \, p(z_t | x_t)\,\overline{bel}(x_t)
+\]
+
+\textit{
+“A correção ajusta essa crença usando o sensor.”}
+
+\subsubsection{Filtro Bayesiano: Explicação Termo a Termo}
+
+O filtro bayesiano é o núcleo matemático da robótica probabilística. Seu objetivo é estimar o estado real do robô mesmo quando sensores são ruidosos e atuadores são imprecisos. Ele opera de forma recursiva, em dois passos: predição e correção. A seguir, apresenta-se a explicação completa de cada termo envolvido nas equações fundamentais.
+
+\subsubsection*{Equação de Predição}
+
+\[
+\overline{bel}(x_t)=\int p(x_t \mid u_t, x_{t-1})\, bel(x_{t-1}) \, dx_{t-1}
+\]
+
+\paragraph{1. \boldmath{$bel(x_{t-1})$} — Crença Anterior}
+Representa a distribuição de probabilidade sobre o estado no instante anterior. É o conhecimento acumulado até o tempo $t-1$. Não é um valor único, mas sim toda a incerteza do robô antes da etapa atual.
+
+\paragraph{2. \boldmath{$u_t$} — Comando de Controle}
+Corresponde à ação aplicada ao robô (velocidade, rotação, aceleração). O filtro assume que essa ação contém incertezas, como derrapagens ou erros de motor.
+
+\paragraph{3. \boldmath{$p(x_t \mid u_t, x_{t-1})$} — Modelo de Movimento}
+É a probabilidade de o robô transitar do estado $x_{t-1}$ para $x_t$ após executar $u_t$. Modela formalmente o erro dos atuadores e a imprevisibilidade do movimento.
+
+\paragraph{4. A Integral \boldmath{$\int (\cdots)\, dx_{t-1}$}}
+A integral combina todas as possíveis posições anteriores ponderadas por suas probabilidades. Ela propaga toda a incerteza do passado para o futuro, gerando uma predição estatística consistente.
+
+\paragraph{5. \boldmath{$\overline{bel}(x_t)$} — Crença Prévia}
+É a crença do robô antes de considerar a medição do sensor. Representa o que se espera sobre o estado após aplicar o comando, mas ainda sem informações sensoriais.
+
+\subsubsection*{Equação de Correção}
+
+\[
+bel(x_t)=\eta \, p(z_t \mid x_t) \, \overline{bel}(x_t)
+\]
+
+\paragraph{6. \boldmath{$z_t$} — Medição do Sensor}
+É o valor capturado pelo sensor no instante $t$. Pode ser leitura de distância, cor, temperatura, profundidade, etc. Cada um desses sensores contém ruído que deve ser modelado probabilisticamente.
+
+\paragraph{7. \boldmath{$p(z_t \mid x_t)$} — Modelo de Observação}
+Informa a probabilidade de observar $z_t$ caso o robô esteja realmente no estado $x_t$. Mede a consistência entre a predição e o sensor, filtrando leituras ruidosas.
+
+\paragraph{8. \boldmath{$\eta$} — Constante de Normalização}
+Garante que a soma total da distribuição resultante seja igual a 1. Sem essa constante, a função resultante não seria uma distribuição de probabilidade válida.
+
+\paragraph{9. \boldmath{$bel(x_t)$} — Crença Posterior}
+É a crença final do robô sobre seu estado no instante $t$, já corrigida com a medição. Essa distribuição será usada como crença anterior no próximo ciclo do filtro.
+
+\bigskip
+
+\subsubsection*{Interpretação Conceitual}
+O filtro bayesiano combina duas fontes de informação:
+\begin{itemize}
+    \item conhecimento prévio (movimento + crença passada);
+    \item evidência sensorial atual.
+\end{itemize}
+A fusão dessas duas partes produz uma estimativa robusta e matematicamente fundamentada, essencial para robôs operando sob incerteza.
+
+Na apresentação, dizer:
+
+
+\subsection{5.4 Métodos Considerados}
+\begin{itemize}
+    \item \textbf{Filtro de Kalman} — eficiente, mas assume linearidade.
+    \item \textbf{EKF} — linearização; bom para robôs móveis.
+    \item \textbf{Filtro de Partículas} — mais flexível, porém mais pesado.
+\end{itemize}
+
+Na apresentação, dizer:
+
+\textit{
+“A principal decisão metodológica é equilibrar robustez estatística e custo computacional.”}
+
+\subsection{5.5 Classificador Probabilístico}
+O classificador atribui categorias às entradas sensoriais:
+
+\[
+P(C_k | \mathbf{x}) \propto P(C_k)\prod_{i=1}^{n} P(x_i | C_k)
+\]
+
+Vantagens para robótica embarcada:
+
+\begin{itemize}
+    \item Independência condicional reduz custos;
+    \item Atualização rápida;
+    \item Fácil de calibrar;
+    \item Probabilístico: combina diretamente com o filtro.
+\end{itemize}
+
+\subsection{Classificador Probabilístico na Metodologia}
+
+O classificador probabilístico desempenha um papel complementar ao filtro bayesiano dentro da arquitetura proposta. Enquanto o filtro estima o estado contínuo do robô (posição, orientação, variáveis ambientais), o classificador é responsável pela tomada de decisão discreta, atribuindo cada conjunto de leituras sensoriais a uma categoria ou evento de interesse.
+
+\subsubsection*{Modelo Probabilístico}
+
+O classificador é baseado na regra de Bayes aplicada à tarefa de decisão:
+
+\[
+P(C_k \mid \mathbf{x}) \propto P(C_k)\prod_{i=1}^{n} P(x_i \mid C_k)
+\]
+
+onde:
+\begin{itemize}
+    \item $C_k$ representa uma classe ou categoria possível (ex.: tipo de terreno, condição ambiental, estado operacional do robô);
+    \item $\mathbf{x} = (x_1, x_2, \ldots, x_n)$ são as leituras sensoriais recebidas no instante atual;
+    \item $P(C_k)$ é a probabilidade a priori da classe;
+    \item $P(x_i \mid C_k)$ é a verossimilhança da leitura $x_i$ caso a classe seja verdadeira;
+    \item o produto assume independência condicional entre sensores, característica essencial para execução em hardware embarcado de baixo custo.
+\end{itemize}
+
+\subsubsection*{Motivação Dentro da Pesquisa}
+
+O classificador probabilístico foi escolhido devido a:
+\begin{itemize}
+    \item baixo custo computacional;
+    \item atualização rápida e recursiva;
+    \item compatibilidade direta com a filosofia Bayesiana da pesquisa;
+    \item robustez a ruídos sensoriais;
+    \item excelente adaptação para microcontroladores.
+\end{itemize}
+
+Na arquitetura proposta, o classificador recebe como entrada:
+\begin{enumerate}
+    \item as medições sensoriais brutas (ex.: TDS, turbidez, cor, temperatura);
+    \item ou as estimativas suavizadas geradas pelo filtro bayesiano.
+\end{enumerate}
+
+Essa integração permite decisões mais confiáveis, pois reduz a influência de leituras irregulares.
+
+\subsubsection*{Fluxo Operacional}
+
+O funcionamento do classificador dentro do sistema segue quatro etapas principais:
+
+\begin{enumerate}
+    \item \textbf{Coleta de Dados}: leitura dos sensores embarcados;
+    \item \textbf{Normalização}: padronização e preparação das entradas;
+    \item \textbf{Cálculo das probabilidades}: avaliação das verossimilhanças e da probabilidade posterior para cada classe;
+    \item \textbf{Decisão}: seleção da classe com maior probabilidade posterior.
+\end{enumerate}
+
+\subsubsection*{Integração com o Filtro Bayesiano}
+
+A integração ocorre em duas direções:
+
+\begin{itemize}
+    \item O classificador utiliza a crença estimada pelo filtro como informação contextual adicional;
+    \item O resultado do classificador retroalimenta a estimativa de estado, permitindo correções baseadas em eventos discretos.
+\end{itemize}
+
+Assim, obtém-se um sistema híbrido contínuo-discreto que combina percepção e tomada de decisão sob incerteza.
+
+\subsubsection*{Justificativa Científica}
+
+A opção por um classificador probabilístico, em vez de abordagens determinísticas ou redes profundas complexas, se justifica pela natureza da pesquisa:
+
+\begin{itemize}
+    \item A robótica probabilística exige representações explícitas de incerteza.
+    \item A transparência matemática das distribuições probabilísticas é fundamental.
+    \item Microcontroladores possuem severas limitações de memória e processamento.
+    \item A regra de Bayes garante consistência teórica entre percepção e decisão.
+\end{itemize}
+
+\subsection*{Explicação Oral Recomendada:}
+
+\begin{quote}
+\textit{
+“O classificador probabilístico é a camada de tomada de decisão da minha metodologia.  
+Enquanto o filtro bayesiano estima variáveis contínuas do robô, o classificador transforma essas estimativas em uma decisão discreta — como identificar o tipo de ambiente, classificar uma condição, ou reconhecer um estado específico.
+
+Ele usa a regra de Bayes para calcular a probabilidade de cada categoria, dado o conjunto de sensores. Isso é importante porque os sensores têm ruído, e o classificador consegue incorporar essa incerteza naturalmente.
+
+Além disso, ele é extremamente leve computacionalmente, então pode ser executado em microcontroladores sem perda de desempenho. Essa escolha mantém toda a arquitetura probabilística coerente, desde a percepção até a decisão final.”
+}
+\end{quote}
+
+\subsection{5.6 Integração Filtro + Classificador}
+Na minha pesquisa unifica duas camadas tradicionalmente separadas:
+
+\begin{enumerate}
+    \item \textbf{Percepção} — estimativa contínua de estado;  
+    \item \textbf{Decisão} — classificação probabilística.  
+\end{enumerate}
+
+Ambas compartilham:
+\begin{itemize}
+    \item mesma representação probabilística;
+    \item mesma base teórica (regra de Bayes);
+    \item mesmas estratégias de otimização computacional.
+\end{itemize}
+
+\subsection{5.7 Otimização para Hardware Embarcado}
+Pontos que a banca valoriza:
+
+\begin{itemize}
+    \item quantização de variáveis;
+    \item redução da dimensionalidade;
+    \item pré-cálculo de tabelas de probabilidade;
+    \item uso de estruturas matemáticas leves;
+    \item implementação em C/C++ otimizada.
+\end{itemize}
+
+Fala recomendada:
+
+\textit{
+“O desafio é manter rigor probabilístico sem ultrapassar os limites de memória e processamento do microcontrolador.”}
+
+% --------------------------------------------------------
+\section{6. Contribuições Esperadas}
+\begin{itemize}
+    \item Framework probabilístico leve para robôs de baixo custo;
+    \item Algoritmos otimizados para microcontroladores;
+    \item Integração filtro + classificador;
+    \item Avanços para navegação robusta.
+\end{itemize}
+
+\section{7. Comportamento Diante da Banca}
+\subsection{Postura}
+\begin{itemize}
+    \item Fale devagar e com clareza;
+    \item Evite ler slides;
+    \item Use pausas estratégicas;
+    \item Mantenha contato visual;
+    \item Mostre segurança, não arrogância.
+\end{itemize}
+
+\subsection{Frases que transmitem maturidade}
+\begin{itemize}
+    \item “Este ponto está em desenvolvimento, mas já temos diretrizes claras.”
+    \item “Essa é uma excelente pergunta.”
+    \item “Planejo investigar isso na etapa experimental.”
+\end{itemize}
+
+\section{8. Como Responder Perguntas Difíceis}
+\subsection{Estratégia em Três Etapas}
+\begin{enumerate}
+    \item Reconheça a pergunta  
+    \item Responda objetivamente  
+    \item Conecte à pesquisa
+\end{enumerate}
+
+\subsection{Se não souber responder}
+Diga:
+\begin{quote}
+“Ainda não tenho esse resultado, mas isso se alinha à próxima etapa da pesquisa, onde investigarei exatamente esse comportamento.”
+\end{quote}
+
+\section{9. Pontos Fortes da Sua Pesquisa}
+\begin{itemize}
+    \item Integração teórico-prática rara;
+    \item Base sólida na literatura clássica;
+    \item Aplicabilidade em robôs reais;
+    \item Benefício direto para robótica de baixo custo;
+    \item Relevância acadêmica e social.
+\end{itemize}
+
+\section{Conclusão}
+Este documento sintetiza todo o necessário para realizar uma apresentação forte, organizada, convincente e cientificamente sólida.
+
+Recomenda-se ler este guia diversas vezes e usá-lo paralelamente aos seus slides em Beamer.
+
+\end{document}
+

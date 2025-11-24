@@ -1,4 +1,6 @@
 // Código para testar o sensor de umidade do solo HD-38
+
+#include <Arduino.h>
 #define SENSOR_PINO A0  // Pino analógico conectado ao sensor
 
 void setup() {
