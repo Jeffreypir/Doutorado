@@ -1,2 +1,0 @@
-"Load template in *tex
-au BufNewFile,BufRead *md :set filetype=md
